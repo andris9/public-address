@@ -1,10 +1,10 @@
-"use strict";
+'use strict';
 
-var http = require("http");
+var http = require('http');
 
 module.exports = resolve;
 
-function resolve(options, callback){
+function resolve(options, callback) {
     var requestOptions = {
         hostname: 'www.remoteaddress.net',
         port: 80,
@@ -12,40 +12,41 @@ function resolve(options, callback){
         method: 'GET'
     };
 
-    if(!callback && typeof options == "function"){
+    if (!callback && typeof options == 'function') {
         callback = options;
         options = undefined;
     }
 
     options = options || {};
-    Object.keys(options).forEach(function(key){
+    Object.keys(options).forEach(function(key) {
         requestOptions[key] = options[key];
     });
 
     http.get(requestOptions, function(res) {
-        var chunks = [], chunklen = 0;
+        var chunks = [],
+            chunklen = 0;
 
-        if(res.statusCode != 200){
-            res.on("data", function(){});
-            res.on("end", function(){
-                callback(new Error("Invalid response code " + res.statusCode));
+        if (res.statusCode != 200) {
+            res.on('data', function() {});
+            res.on('end', function() {
+                callback(new Error('Invalid response code ' + res.statusCode));
             });
             return;
         }
 
-        res.on("data", function(chunk){
+        res.on('data', function(chunk) {
             chunks.push(chunk);
             chunklen += chunk.length;
         });
 
-        res.on("end", function(){
+        res.on('end', function() {
             var data;
-            try{
+            try {
                 data = JSON.parse(Buffer.concat(chunks, chunklen).toString());
-            }catch(exception){}
-            if(!data){
-                callback(new Error("Invalid response from server"));
-            }else{
+            } catch (exception) {}
+            if (!data) {
+                callback(new Error('Invalid response from server'));
+            } else {
                 callback(null, data);
             }
         });
