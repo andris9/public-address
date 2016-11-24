@@ -2,7 +2,7 @@
 
 Resolve the public IP address and hostname of your current machine.
 
-This module makes a HTTP request to www.remoteaddress.net IP resolving service.
+This module makes a HTTP request to https://www.ipify.org/ IP resolving service.
 
 ## Installation
 

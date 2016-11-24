@@ -1,6 +1,6 @@
 {
   "name": "public-address",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Resolve public IP address and hostname",
   "main": "index.js",
   "scripts": {
@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/andris9/public-address",
   "devDependencies": {
-    "nodeunit": "~0.8.2"
+    "nodeunit": "~0.10.2"
   }
 }
